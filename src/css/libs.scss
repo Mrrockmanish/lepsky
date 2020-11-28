@@ -1,0 +1,73 @@
+@import "../../node_modules/slick-carousel/slick/slick.scss";
+@import "../../node_modules/slick-carousel/slick/slick-theme.scss";
+@import "../../node_modules/magnific-popup/dist/magnific-popup";
+
+$root-font-size: 16;
+
+@function s($size) {
+  @return $size / $root-font-size * 1rem;
+}
+
+.offer-area {
+  &__arrows {
+    width: 10rem;
+    height: 4rem;
+    @media (min-width: 1200px) {
+      width: s(256);
+      height: s(128);
+    }
+    right: 0;
+    bottom: 0;
+  }
+
+  &__arrow {
+    cursor: pointer;
+    display: flex;
+    width: 50%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+
+    &:hover {
+      opacity: .75;
+    }
+
+    &_prev {
+      background: rgba(105, 105, 105, 0.21);
+    }
+
+    &_next {
+      background-color: #525252;
+    }
+  }
+}
+
+.small-arrows {
+  width: s(130);
+  justify-content: space-between;
+  display: flex;
+  flex-shrink: 0;
+  margin-bottom: 1.5rem;
+
+  &__arrow {
+    cursor: pointer;
+    border-radius: s(6);
+    width: s(48);
+    height: s(48);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+
+    &:hover {
+      opacity: .75;
+    }
+  }
+  &_prev {
+    background: rgba(105, 105, 105, 0.21);
+  }
+  &_next {
+    background-color: #525252;
+  }
+}
