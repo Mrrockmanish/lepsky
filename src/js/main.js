@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
 //маска телефона
-  $('input[name="tel"]').mask("+7(999) 999-9999");
+  $('input[name="tel"]').mask("+7 (999) 999 99 99");
   
   $('.offer-area__carousel').slick({
     appendArrows: $('.offer-area__arrows'),
@@ -101,17 +101,42 @@ $(document).ready(function () {
     showArtist(artistItem);
   });
 
-
+  // галерея
   $('.models-gallery').magnificPopup({
     delegate: 'a',
     type: 'image',
     gallery: {
       enabled: true
     }
-  })
+  });
+  // отображаем названия прикреплённых файлов
+  $('.form-textarea__input').on('change', function (){
+    $('.form-textarea__files').text('');
+    const files = document.getElementById('input-file').files;
 
+    const names = Object.entries(files).map(([other, {name}]) => name)
+      .forEach((item) => {
+        $('.form-textarea__files').append(`<div class="px-2">${item}</div>`);
+      })
+  });
 
+  $('.buy').on('click', function () {
+    $('.buy-modal').arcticmodal();
+  });
 
+  // задаём высоту для видео
+  const setHeightVideo = (iframeSelector) => {
+    const width = $(iframeSelector).width();
+    $(iframeSelector).height(width*0.5625);
+    $('.ytp-large-play-button-bg svg path').css({
+      'fill': 'green'
+    })
+  };
+  setHeightVideo('.video-item__iframe');
+
+  $(window).resize(function (){
+    setHeightVideo('.video-item__iframe');
+  });
 
 
 

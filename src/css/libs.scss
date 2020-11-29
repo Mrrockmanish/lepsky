@@ -1,8 +1,12 @@
 @import "../../node_modules/slick-carousel/slick/slick.scss";
 @import "../../node_modules/slick-carousel/slick/slick-theme.scss";
 @import "../../node_modules/magnific-popup/dist/magnific-popup";
+@import '../../bower_components/arcticModal/arcticmodal/jquery.arcticmodal';
 
 $root-font-size: 16;
+$bg: #2C2C2C;
+$brown: #B1874E;
+$gray: #626266;
 
 @function s($size) {
   @return $size / $root-font-size * 1rem;
@@ -70,4 +74,31 @@ $root-font-size: 16;
   &_next {
     background-color: #525252;
   }
+}
+
+.buy-modal {
+  background: #424242;
+  background: rgba(66, 66, 66, 0.85);
+}
+
+.box-modal {
+  width: 20rem;
+
+  @media (min-width: 375px) {
+    width: 23rem;
+  }
+  @media (min-width: 576px) {
+    width: s(544);
+  }
+  @media (min-width: 768px) {
+    width: s(660);
+  }
+}
+
+.arcticmodal-container_i2 {
+  padding: 1rem;
+}
+
+.ytp-large-play-button-bg {
+  fill: $brown!important;
 }

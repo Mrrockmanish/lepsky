@@ -572,3 +572,28 @@ h3 {
   background-color: #D0D0D0;
   color: #252525;
 }
+
+.form-input {
+  width: 100%;
+  height: s(40);
+  background: #ffffff;
+  border-radius: s(6);
+  padding: 0 s(16);
+  color: $bg;
+  font-weight: 300;
+  font-size: s(14);
+}
+
+.form-textarea {
+  color: $bg;
+  font-weight: 300;
+  height: s(136);
+  resize: none;
+  font-size: s(14);
+}
+
+.form-comment-wrap {
+  border-radius: s(6);
+  background: #ffffff;
+  padding: s(16) s(16);
+}

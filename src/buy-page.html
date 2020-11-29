@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+//= templates/head.html
+<body class="relative">
+//= templates/header.html
+<main class="container relative pb-16 lg:pb-24 ">
+    //= templates/aside.html
+    //= templates/breadcrumb.html
+    <h1>
+        Lepsky Dominator 6
+    </h1>
+    <div class="flex flex-wrap -mx-4">
+        <div class="w-full xxl:w-9/12 order-2 xxl:order-1 px-4 mt-8 xxl:mt-0">
+            <div>
+                <img src="img/products/big1.jpg" class="rounded-lg" alt="название" title="название">
+            </div>
+            <h2 class="mt-12">
+                Как купить
+            </h2>
+            <div>
+                Цельный гриф с накладкой или без, всегда 22 лада, гриф на винтах - основные характеристики S model.
+                Бридж может быть выбран фиксированный, тремоло или Флойд Роуз.
+                Классический вариант с электроникой под пикгардом или современный вариант без пластиковых панелей на корпусе, на выбор заказчика.
+                Цельный гриф с накладкой или без, всегда 22 лада, гриф на винтах - основные характеристики S model.
+                Бридж может быть выбран фиксированный, тремоло или Флойд Роуз.
+            </div>
+            <h2 class="mt-10">
+                Фото гитары
+            </h2>
+            <div class="flex flex-wrap -mx-4">
+                <div class="product-item px-4 mt-8">
+                    <div class="product-item__inner block mx-auto md:ml-0 overflow-hidden rounded-lg">
+                        <img src="img/buy/1.jpg" alt="название товара" title="название товара">
+                    </div>
+                </div>
+                <div class="product-item px-4 mt-8">
+                    <div class="product-item__inner block mx-auto md:ml-0 overflow-hidden rounded-lg">
+                        <img src="img/buy/2.jpg" alt="название товара" title="название товара">
+                    </div>
+                </div>
+                <div class="product-item px-4 mt-8">
+                    <div class="product-item__inner block mx-auto md:ml-0 overflow-hidden rounded-lg">
+                        <img src="img/buy/3.jpg" alt="название товара" title="название товара">
+                    </div>
+                </div>
+            </div>
+            <h2 class="mt-16 lg:mt-20">
+                Процесс создания
+            </h2>
+            <h2 class="mt-16 lg:mt-20">
+                Хотите задать вопрос перед заказом?
+            </h2>
+            <div class="bg-dark pt-10 pb-12 px-4 sm:px-12">
+                <form class="flex flex-wrap -mx-3 lg:-mx-5" enctype="multipart/form-data" style="max-width: 62rem" accept="image/jpeg, image/png, image/gif">
+                    <div class="form-group w-full md:w-1/3 px-3 lg:px-5">
+                        <label for="quest-name" class="text-gray-81 text-sm">
+                            Ваши Фамилия и Имя*
+                        </label>
+                        <div class="mt-2">
+                            <input type="text" name="name" id="quest-name" class="form-input placeholder-gray-99" placeholder="Иванов Иван">
+                        </div>
+                    </div>
+                    <div class="form-group w-full md:w-1/3 px-3 lg:px-5 mt-4 md:mt-0">
+                        <label for="quest-phone" class="text-gray-81 text-sm">
+                            Ваш номер телефона
+                        </label>
+                        <div class="mt-2">
+                            <input type="text" name="tel" id="quest-phone" class="form-input placeholder-gray-99" placeholder="+7 (___) ___ __ __">
+                        </div>
+                    </div>
+                    <div class="form-group w-full md:w-1/3 px-3 lg:px-5 mt-4 md:mt-0">
+                        <label for="quest-email" class="text-gray-81 text-sm">
+                            Ваш адрес электронной почты*
+                        </label>
+                        <div class="mt-2">
+                            <input type="text" name="email" id="quest-email" class="form-input placeholder-gray-99" placeholder="ivanov@yandex.ru">
+                        </div>
+                    </div>
+                    <div class="form-group w-full mt-4 md:mt-8 px-3 lg:px-5">
+                        <label for="quest-comment" class="text-gray-81 text-sm">
+                            Ваш адрес электронной почты*
+                        </label>
+                        <div class="form-comment-wrap overflow-hidden mt-2">
+                            <textarea name="comment" id="quest-comment" class="form-textarea outline-none placeholder-gray-99 w-full" placeholder="Здесь вы можете описать свой вопрос, уточнить интересующую вас информацию и прикерпить необходимые файлы"></textarea>
+                            <div class="flex items-center">
+                                <div class="flex-grow mr-4">
+                                    <div class="form-textarea__files text-bg flex flex-wrap justify-end -mx-2">
+
+                                    </div>
+                                </div>
+                                <div class="w-10 h-10">
+                                    <label class="flex items-center justify-center bg-brown rounded-full w-10 h-10 hover:opacity-75 cursor-pointer">
+                                        <input type="file" value="files[]" multiple class="form-textarea__input hidden" id="input-file">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M18.9941 2.57158L18.2616 1.83906C16.9205 0.497907 14.7461 0.497907 13.4049 1.83902C13.4049 1.83902 13.4049 1.83902 13.4049 1.83906L4.04471 11.1992C3.09638 12.1476 3.09638 13.6851 4.04471 14.6335L4.53304 15.1218C5.499 16.0266 7.00133 16.0266 7.96728 15.1218L14.8782 8.21086C15.0437 8.05097 15.0483 7.78722 14.8885 7.62167C14.7286 7.45616 14.4648 7.45159 14.2993 7.61143C14.2958 7.61479 14.2924 7.61819 14.289 7.62167L7.37809 14.5326C6.7434 15.1265 5.75693 15.1265 5.12223 14.5326L4.6339 14.0443C4.01096 13.4214 4.01089 12.4115 4.63375 11.7886C4.63379 11.7885 4.63387 11.7885 4.6339 11.7884L13.994 2.42821C15.024 1.44726 16.6425 1.44726 17.6724 2.42821L18.4049 3.16073C19.4203 4.17664 19.4203 5.8232 18.4049 6.83911L7.96725 17.2768C6.55851 18.685 4.27507 18.685 2.86633 17.2768L1.88964 16.301C0.48141 14.8922 0.48141 12.6088 1.88964 11.2001L9.87814 3.21159C10.0436 3.0517 10.0483 2.78795 9.88837 2.6224C9.72849 2.45689 9.46473 2.45228 9.29918 2.61216C9.29571 2.61552 9.29231 2.61892 9.28895 2.6224L1.30049 10.61C-0.433489 12.344 -0.433489 15.1553 1.30045 16.8893C1.30045 16.8893 1.30049 16.8893 1.30049 16.8893L2.27718 17.866C4.01112 19.6 6.82242 19.6 8.5564 17.8661C8.5564 17.866 8.55644 17.866 8.55644 17.866L18.9941 7.4283C20.3353 6.08719 20.3353 3.91273 18.9941 2.57158C18.9942 2.57158 18.9942 2.57158 18.9941 2.57158Z"
+                                                  fill="white"/>
+                                        </svg>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group w-full flex mt-6 px-3 lg:px-5">
+                        <button type="submit" class="w-full sm:w-auto flex items-center justify-center rounded-lg border border-white hover:border-brown transition duration-300 px-12 h-16">
+                            <span class="font-medium text-lg">Отправить</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="w-full xxl:w-3/12 order-1 xxl:order-2 px-4">
+            <div class="rounded-lg bg-dark-42 py-6 pb-8 px-4 sm:px-8">
+                <div class="font-medium text-2xl">
+                    Спецификации
+                </div>
+                <div class="flex flex-wrap -mx-4">
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Дека: ольха
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Гриф: клен цельный без накладки
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Профиль грифа: Ellipse standart 20/22 mm
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Порожек: TUSQ ivory
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Фурнитура: хром
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Бридж: Gotoh 510 tremolo
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Колки: Gotoh locking
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Покрытие: глянец
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Пикгард: Белый
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Датчики: HS
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Переключатели: 5 позиций lever Schaller E
+                    </div>
+                    <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                        Регуляторы: 1 громкость 1 тон
+                    </div>
+                </div>
+                <div class="text-2xl font-medium mt-4">
+                    Цена: 109 000 руб
+                </div>
+                <button class="button-brown flex items-center justify-center font-medium xxl:w-full buy mt-5 px-12">
+                    Купить
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+//= templates/footer.html
+//= templates/scripts.html
+</body>
+
+</html>
