@@ -304,6 +304,17 @@ h3 {
   }
 }
 
+h4 {
+  font-weight: 500;
+  margin-bottom: 1rem;
+  line-height: 1;
+  font-size: s(22);
+
+  @media (min-width: 1600px) {
+    font-size: s(24);
+  }
+}
+
 .grid-item {
   margin-bottom: s(20);
   @media (min-width: 1400px) {
@@ -596,4 +607,24 @@ h3 {
   border-radius: s(6);
   background: #ffffff;
   padding: s(16) s(16);
+}
+
+.map-container {
+  height: s(350);
+  @media (min-width: 576px) {
+    height: s(500);
+  }
+  @media (min-width: 992px) {
+    height: 100%;
+  }
+}
+
+.dialer-item {
+  max-width: s(416);
+}
+
+.contacts-form {
+  @media (min-width: 992px) {
+      max-width: 18rem;
+  }
 }
