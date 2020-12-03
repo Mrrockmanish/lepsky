@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+//= templates/head.html
+<body class="relative">
+//= templates/header.html
+<main class="container relative pb-16 lg:pb-24 ">
+    //= templates/aside.html
+    //= templates/breadcrumb.html
+    <h1>
+        Lepsky Dominator 6
+    </h1>
+    <form class="steps">
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-full xxl:w-9/12 px-4">
+                <div class="custom-tabs">
+                    <div class="flex">
+                        <div class="custom-tab active px-6">
+                            Гриф
+                        </div>
+                        <div class="custom-tab px-6">
+                            Корпус
+                        </div>
+                        <div class="custom-tab px-6">
+                            Электроника и фурнитура
+                        </div>
+                    </div>
+                    <div class="bg-dark-42 px-5 xl:px-8 pb-6">
+                        <div class="flex flex-wrap -mx-2 xl:-mx-4">
+                            <div class="w-full md:w-1/3 px-2 xl:px-4">
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Тип крепления
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-bracing="На болтах" data-price="100" type="radio" checked name="bracing" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                На болтах
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-bracing="Вклееный" data-price="200" type="radio" name="bracing" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Вклееный
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Материал
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Клен жареный/клен" data-price="100" type="radio" checked name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Клен жареный/клен
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Клен цельный" data-price="200" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Клен цельный
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Клен/махагон" data-price="300" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Клен/махагон
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Клен/орех" data-price="400" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Клен/орех
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Махагон/клен" data-price="500" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Махагон/клен
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Махагон/венге" data-price="600" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Махагон/венге
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Махагон/орех" data-price="700" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Махагон/орех
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-material="Другие материалы" data-price="0" type="radio" name="material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Другие материалы
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Материал накладки
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-facingMaterial="Клен птичий глаз" data-price="100" type="radio" checked name="facing-material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Клен птичий глаз
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-facingMaterial="Пао ферро" data-price="200" type="radio" name="facing-material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Пао ферро
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-facingMaterial="Макассар" data-price="300" type="radio" name="facing-material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Макассар
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-facingMaterial="Эбен" data-price="400" type="radio" name="facing-material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Эбен
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-facingMaterial="Индивидуальный заказ" data-price="0" type="radio" name="facing-material" class="check hidden" >
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Индивидуальный заказ
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/3 px-2 xl:px-4">
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Мензура
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-beaker="25,5" data-price="100" type="radio" checked name="beaker" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                25,5"
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-beaker="27" data-price="200" type="radio" name="beaker" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                27"
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-beaker="Мультимензура 25,5-26,5" data-price="300" type="radio" name="beaker" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Мультимензура 25,5"-26,5"
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Окантовка грифа
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-neckBanding="Клен по накладке" data-price="100" type="radio" checked name="neck-banding" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Клен по накладке
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-neckBanding="Нет" data-price="0" type="radio" name="neck-banding" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Нет
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Маркеры боковой разметки
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-sideMarkers="Точки" data-price="100" type="radio" checked name="side-markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-sideMarkers="Точки luminary" data-price="200" type="radio" name="side-markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки luminary
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-sideMarkers="Блоки перламутр" data-price="300" type="radio" name="side-markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Блоки перламутр
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-sideMarkers="Блоки клен" data-price="400" type="radio" name="side-markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Блоки клен
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-sideMarkers="Блоки эбен" data-price="500" type="radio" name="side-markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Блоки эбен
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Расположение колков
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-pegsLocation="Стандарное" data-price="100" type="radio" checked name="pegs-location" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Стандарное
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-pegsLocation="Реверс" data-price="200" type="radio" name="pegs-location" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Реверс
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-full md:w-1/3 px-2 xl:px-4">
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Маркеры
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Точки 4 мм по центру перламутр белый или черный" checked data-price="100" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки 4 мм по центру перламутр белый или черный
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Точки 4 мм по центру перламутр абалон" data-price="200" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки 4 мм по центру перламутр абалон
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Точки 6 мм по центру перламутр белый или черный" data-price="300" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки 6 мм по центру перламутр белый или черный
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Точки 6 мм по центру перламутр абалон" data-price="400" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки 6 мм по центру перламутр абалон
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Точки 4 мм смещенные вверх" data-price="500" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Точки 4 мм смещенные вверх
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Перламутр инкрустация-рисунок по накладке" data-price="600" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Перламутр инкрустация-рисунок по накладке
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-markers="Перламутр инкрустация-рисунок на 3 лада шириной" data-price="700" type="radio" name="markers" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Перламутр инкрустация-рисунок на 3 лада шириной
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="custom-item pt-6">
+                                    <div class="custom-item__caption text-2xl">
+                                        Цвет головы
+                                    </div>
+                                    <div class="custom-item__content">
+                                        <label class="flex items-center mt-4">
+                                            <input data-headColor="В цвет корпуса" data-price="100" type="radio" checked name="head-color" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                В цвет корпуса
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-headColor="Натуральный" data-price="200" type="radio" name="head-color" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Натуральный
+                                            </span>
+                                        </label>
+                                        <label class="flex items-center mt-4">
+                                            <input data-headColor="Чёрный" data-price="300" type="radio" name="head-color" class="check hidden">
+                                            <span class="check-custom mr-2"></span>
+                                            <span>
+                                                Чёрный
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full xxl:w-3/12 px-4 mt-8 xxl:mt-16">
+                <div class="rounded-lg bg-dark-42 py-6 pb-8 px-4 sm:px-8">
+                    <div class="font-medium text-2xl">
+                        Lepsky Model F
+                    </div>
+                    <div class="flex flex-wrap -mx-4">
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Дека: ольха
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Гриф: клен цельный без накладки
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Профиль грифа: Ellipse standart 20/22 mm
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Порожек: TUSQ ivory
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Фурнитура: хром
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Бридж: Gotoh 510 tremolo
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Колки: Gotoh locking
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Покрытие: глянец
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Пикгард: Белый
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Датчики: HS
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Переключатели: 5 позиций lever Schaller E
+                        </div>
+                        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+                            Регуляторы: 1 громкость 1 тон
+                        </div>
+                    </div>
+                    <div class="text-2xl font-medium mt-4">
+                        Цена: <span class="steps__price"></span>&nbsp;руб
+                    </div>
+                    <button class="button-brown flex items-center justify-center font-medium xxl:w-full buy mt-5 px-12">
+                        Купить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</main>
+//= templates/footer.html
+//= templates/scripts.html
+</body>
+
+</html>

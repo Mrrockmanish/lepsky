@@ -22,6 +22,11 @@ $(document).ready(function () {
     itemSelector: '.grid-item'
   });
 
+  $('.process-grid').masonry({
+    itemSelector: '.process-grid__item',
+
+  });
+
   $('.products-carousel').slick({
     slidesToScroll: 4,
     slidesToShow: 4,
@@ -102,13 +107,22 @@ $(document).ready(function () {
   });
 
   // галерея
-  $('.models-gallery').magnificPopup({
-    delegate: 'a',
-    type: 'image',
-    gallery: {
-      enabled: true
-    }
-  });
+
+  const gallery = (galleryEl, delegateSelector) => {
+    galleryEl.each(function (){
+      $(this).magnificPopup({
+        delegate: delegateSelector,
+        type: 'image',
+        gallery: {
+          enabled: true
+        }
+      });
+    })
+  };
+
+  gallery($('.process-grid'), 'a');
+  gallery($('.models-gallery'), 'a');
+
   // отображаем названия прикреплённых файлов
   $('.form-textarea__input').on('change', function (){
     $('.form-textarea__files').text('');
@@ -139,10 +153,24 @@ $(document).ready(function () {
   });
 
 
+  // $('.custom-item').on('click', '.custom-item__caption', function () {
+  //   $(this).next('.custom-item__content').fadeToggle();
+  // });
 
+  const customCalc = () => {
+    const customItem = $('.custom-item').find('[data-price]:checked').toArray();
+    const pricesSum = customItem.map((item) => item.getAttribute('data-price'))
+      .reduce((acc, current) => {
+        return acc + Number(current);
+      }, 0);
+    console.log(pricesSum);
+    $('.steps__price').text(pricesSum);
+  };
 
+  customCalc();
 
-
-
+  $('.steps').on('change', 'input', function (){
+    customCalc();
+  })
 
 });

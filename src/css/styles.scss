@@ -222,6 +222,9 @@ a {
   height: s(56);
 
   &_h {
+    &_40 {
+      height: s(40);
+    }
     &_48 {
       height: s(48);
     }
@@ -626,5 +629,129 @@ h4 {
 .contacts-form {
   @media (min-width: 992px) {
       max-width: 18rem;
+  }
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  width: 100%;
+}
+
+.process-grid__item {
+  &_sm {
+    float: left;
+    width: 50%;
+    @media (min-width: 450px) {
+      width: 33.33%;
+    }
+    @media (min-width: 768px) {
+      width: 25%;
+    }
+    @media (min-width: 992px) {
+      width: auto;
+    }
+    img {
+      width: s(227);
+
+      @media (min-width: 992px) {
+        height: s(368);
+      }
+    }
+  }
+  &_md {
+    float: left;
+    width: 50%;
+    @media (min-width: 450px) {
+      width: 33.33%;
+    }
+    @media (min-width: 768px) {
+      width: 45%;
+    }
+    @media (min-width: 992px) {
+      width: auto;
+    }
+    img {
+      width: s(353);
+
+      @media (min-width: 992px) {
+        height: s(752);
+      }
+    }
+  }
+  &_lg {
+    float: left;
+    width: 50%;
+    @media (min-width: 450px) {
+      width: 33.33%;
+    }
+    @media (min-width: 768px) {
+      width: 50%;
+    }
+    @media (min-width: 992px) {
+      width: auto;
+    }
+    img {
+      width: s(470);
+
+      @media (min-width: 992px) {
+        height: s(368);
+      }
+    }
+  }
+}
+
+.custom-item {
+  font-size: s(16);
+  @media (min-width: 1600px) {
+    font-size: s(18);
+  }
+}
+
+.check-custom {
+  width: s(24);
+  height: s(24);
+  border-radius: s(4);
+  border: s(1) solid #fff;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.check + .check-custom::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: s(2);
+  transition: .3s;
+}
+
+.check:checked + .check-custom::after {
+  width: s(12);
+  height: s(12);
+}
+
+.custom-tab {
+  height: s(64);
+  font-size: s(16);
+  font-weight: 500;
+  line-height: .9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: s(16);
+  border-top-left-radius: s(16);
+
+  @media (min-width: 768px) {
+    font-size: s(32);
+  }
+
+  &.active {
+    background-color: #424242;
   }
 }
