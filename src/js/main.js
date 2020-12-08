@@ -120,7 +120,7 @@ $(document).ready(function () {
     })
   };
 
-  gallery($('.process-grid'), 'a');
+  gallery($('.process-block'), 'a');
   gallery($('.models-gallery'), 'a');
 
   // отображаем названия прикреплённых файлов
@@ -136,6 +136,10 @@ $(document).ready(function () {
 
   $('.buy').on('click', function () {
     $('.buy-modal').arcticmodal();
+  });
+
+  $('.info-call').on('click', function () {
+    $('.info-modal').arcticmodal();
   });
 
   // задаём высоту для видео
@@ -163,7 +167,6 @@ $(document).ready(function () {
       .reduce((acc, current) => {
         return acc + Number(current);
       }, 0);
-    console.log(pricesSum);
     $('.steps__price').text(pricesSum);
   };
 
@@ -172,5 +175,55 @@ $(document).ready(function () {
   $('.steps').on('change', 'input', function (){
     customCalc();
   })
+
+  // табы
+  $('.custom-tabs').on('click', '.custom-tabs__tab:not(.active)', function (){
+    const current = $(this).data('tab');
+    $(this).closest('.custom-tabs').find('.custom-tabs__tab.active').removeClass('active');
+    $(this).addClass('active');
+
+    $(this).closest('.custom-tabs').find('.custom-tabs__content.active').removeClass('active').hide();
+    $(this).closest('.custom-tabs').find(`.custom-tabs__content[data-tab="${current}"]`).addClass('active').fadeIn();
+  })
+
+
+
+  $('[data-model]').on('change', function (){
+    $(this).closest('.steps').prev('.params-filter').hide();
+    $(this).closest('.step-one').hide();
+    $(this).closest('.step-one').next('.step-two').fadeIn();
+  });
+
+  // ездиющий блок
+  const slideBlock = (endPositionBlockSelector, slideBlockSelector) => {
+    // Получаем позицию на которой заканчивается скольжение.
+    // Нужно взять расстояние от блока на котором заканчивается скольжение до верха документа,
+    // отнять высоту скользяшего блока, отнять расстояние от блока в котором лежит скользяший блок до верха документа,
+    // отнять позицию с которой наченается скольжение
+    const endPosition = $(endPositionBlockSelector).offset().top - $(slideBlockSelector).outerHeight() - $('#guitar-content').offset().top + 100;
+    // 100 это позиция прокрутки с которой блок начинает движение
+    $(window).scroll(function (){
+
+      if ($(window).scrollTop() >= endPosition) {
+        $(slideBlockSelector).css({
+          'position': 'relative',
+          'top': `${endPosition - 100}px`
+        });
+      } else if ($(window).scrollTop() < endPosition && $(window).scrollTop() > 100) {
+        $(slideBlockSelector).css({
+          'position': 'fixed',
+          'top': `${$('#guitar-content').offset().top - 100}px`
+        });
+      } else if ($(window).scrollTop() < 100) {
+        $(slideBlockSelector).css({
+          'position': 'static',
+        });
+      }
+    });
+
+  };
+
+  slideBlock('.endPosition', '.specifications');
+
 
 });

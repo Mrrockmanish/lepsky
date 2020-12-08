@@ -76,7 +76,21 @@ $gray: #626266;
   }
 }
 
-.buy-modal {
+.products-carousel {
+  .slick-track {
+    padding-bottom: s(16);
+  }
+}
+
+.arcticmodal-close {
+  cursor: pointer;
+  transition: .3s;
+  &:hover {
+    opacity: .75;
+  }
+}
+
+.buy-modal, .info-modal {
   background: #424242;
   background: rgba(66, 66, 66, 0.85);
 }
