@@ -22,10 +22,6 @@ $(document).ready(function () {
     itemSelector: '.grid-item'
   });
 
-  $('.process-grid').masonry({
-    itemSelector: '.process-grid__item',
-
-  });
 
   $('.products-carousel').slick({
     slidesToScroll: 4,
@@ -138,6 +134,10 @@ $(document).ready(function () {
     $('.buy-modal').arcticmodal();
   });
 
+  $('.order').on('click', function () {
+    $('.order-modal').arcticmodal();
+  });
+
   $('.info-call').on('click', function () {
     $('.info-modal').arcticmodal();
   });
@@ -146,14 +146,13 @@ $(document).ready(function () {
   const setHeightVideo = (iframeSelector) => {
     const width = $(iframeSelector).width();
     $(iframeSelector).height(width*0.5625);
-    $('.ytp-large-play-button-bg svg path').css({
-      'fill': 'green'
-    })
   };
   setHeightVideo('.video-item__iframe');
+  setHeightVideo('.videos-right__iframe');
 
   $(window).resize(function (){
     setHeightVideo('.video-item__iframe');
+    setHeightVideo('.videos-right__iframe');
   });
 
 
@@ -200,30 +199,50 @@ $(document).ready(function () {
     // Нужно взять расстояние от блока на котором заканчивается скольжение до верха документа,
     // отнять высоту скользяшего блока, отнять расстояние от блока в котором лежит скользяший блок до верха документа,
     // отнять позицию с которой наченается скольжение
-    const endPosition = $(endPositionBlockSelector).offset().top - $(slideBlockSelector).outerHeight() - $('#guitar-content').offset().top + 100;
-    // 100 это позиция прокрутки с которой блок начинает движение
-    $(window).scroll(function (){
 
-      if ($(window).scrollTop() >= endPosition) {
-        $(slideBlockSelector).css({
-          'position': 'relative',
-          'top': `${endPosition - 100}px`
-        });
-      } else if ($(window).scrollTop() < endPosition && $(window).scrollTop() > 100) {
-        $(slideBlockSelector).css({
-          'position': 'fixed',
-          'top': `${$('#guitar-content').offset().top - 100}px`
-        });
-      } else if ($(window).scrollTop() < 100) {
-        $(slideBlockSelector).css({
-          'position': 'static',
-        });
-      }
-    });
-
+    if ($(endPositionBlockSelector)[0] !== undefined) {
+      const endPosition = $(endPositionBlockSelector).offset().top - $(slideBlockSelector).outerHeight() - $('#guitar-content').offset().top + 100;
+      // 100 это позиция прокрутки с которой блок начинает движение
+      $(window).scroll(function (){
+        if ($(window).scrollTop() >= endPosition) {
+          $(slideBlockSelector).css({
+            'position': 'relative',
+            'top': `${endPosition - 100}px`
+          });
+        } else if ($(window).scrollTop() < endPosition && $(window).scrollTop() > 100) {
+          $(slideBlockSelector).css({
+            'position': 'fixed',
+            'top': `${$('#guitar-content').offset().top - 100}px`
+          });
+        } else if ($(window).scrollTop() < 100) {
+          $(slideBlockSelector).css({
+            'position': 'static',
+          });
+        }
+      });
+    }
   };
 
   slideBlock('.endPosition', '.specifications');
 
+
+  const playVideos = () => {
+    const firstVideoSrc = $('.videos-item')[0].getAttribute('data-video');
+    $('.videos-right iframe').attr('src', firstVideoSrc);
+
+    $('.videos-item').on('click', function (){
+      const dataVideo = $(this).data('video');
+      $('.videos-right iframe').attr('src', dataVideo);
+    });
+
+  };
+
+  if ($('.videos-item')[0] !== undefined) {
+    playVideos();
+  }
+
+  $('.video-link').magnificPopup({
+    type: 'iframe'
+  });
 
 });

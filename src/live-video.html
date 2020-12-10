@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+//= templates/head.html
+<body class="relative">
+//= templates/header.html
+<main class="container relative pb-16 lg:pb-24 ">
+    //= templates/aside.html
+    //= templates/breadcrumb.html
+    <h1>
+        Live-video
+    </h1>
+    <div class="videos flex flex-wrap -mx-4">
+        <div class="w-3/12 px-4">
+            <div class="videos-left bg-dark-42 rounded-lg w-full h-full py-6 px-4">
+                <div class="videos-left__inner flex flex-col pr-4">
+                    <div data-video="https://www.youtube.com/embed/OifwJ8eBptY" class="videos-item relative hover-effect cursor-pointer">
+                        <img src="img/images/video-item.jpg" alt="название видео" title="Название видео">
+                        <div class="play-icon absolute flex items-center justify-center">
+                            <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 7L3.01142e-07 13.9282L9.06825e-07 0.0717964L12 7Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div data-video="https://www.youtube.com/embed/Xa3jPpfQ7KE" class="videos-item relative hover-effect cursor-pointer mt-4">
+                        <img src="img/images/video-item.jpg" alt="название видео" title="Название видео">
+                        <div class="play-icon absolute flex items-center justify-center">
+                            <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 7L3.01142e-07 13.9282L9.06825e-07 0.0717964L12 7Z" fill="white"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="w-9/12 px-4">
+            <div class="videos-right w-full rounded-lg overflow-hidden">
+                <iframe class="videos-right__iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</main>
+//= templates/footer.html
+//= templates/scripts.html
+</body>
+
+</html>
