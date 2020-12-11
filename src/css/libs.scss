@@ -116,3 +116,19 @@ $gray: #626266;
 .ytp-large-play-button-bg {
   fill: $brown!important;
 }
+
+.scrollbar-track {
+  border-radius: 4px;
+}
+
+.scroll-content {
+  display: flex;
+  flex-wrap: wrap;
+
+
+  @media (min-width: 1200px) {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

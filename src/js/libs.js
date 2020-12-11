@@ -13,4 +13,6 @@
 
 //= ../../node_modules/masonry-layout/dist/masonry.pkgd.js
 
+//= ../../node_modules/smooth-scrollbar/dist/smooth-scrollbar.js
+
 

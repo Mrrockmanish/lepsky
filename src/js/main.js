@@ -225,14 +225,14 @@ $(document).ready(function () {
 
   slideBlock('.endPosition', '.specifications');
 
-
+  // проигрываем видео в live-videos
   const playVideos = () => {
     const firstVideoSrc = $('.videos-item')[0].getAttribute('data-video');
     $('.videos-right iframe').attr('src', firstVideoSrc);
 
     $('.videos-item').on('click', function (){
       const dataVideo = $(this).data('video');
-      $('.videos-right iframe').attr('src', dataVideo);
+      $('.videos-right iframe').attr('src', dataVideo).trigger('click');
     });
 
   };
@@ -241,8 +241,37 @@ $(document).ready(function () {
     playVideos();
   }
 
+  // видео в попапе
   $('.video-link').magnificPopup({
     type: 'iframe'
   });
+
+  // красивый сролл
+
+  const beautyScroll = (element) => {
+    const content = element;
+    const Scrollbar = window.Scrollbar;
+
+    Scrollbar.init(content, {
+      alwaysShowTracks: true,
+      continuousScrolling: false
+    });
+  };
+
+  if ($('.videos-left__inner')[0]) {
+    beautyScroll($('.videos-left__inner')[0]);
+  }
+
+  //мобильное меню
+
+  $('.bars').on('click', function (){
+    $('.mobile-menu').fadeIn();
+    $('body').addClass('overflow-hidden');
+  });
+
+  $('.mobile-menu__close').on('click', function (){
+    $('.mobile-menu').fadeOut();
+    $('body').removeClass('overflow-hidden');
+  })
 
 });
