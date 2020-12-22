@@ -61,10 +61,10 @@ function tailwindCss() {
   const plugins = [
     tailwindcss(),
     cssnano(),
-    purgecss({
-      content: ['src/**/*.html'],
-      defaultExtractor: content => content.match(/[\w-/:#]+(?<!:)/g) || []
-    }),
+    // purgecss({
+    //   content: ['src/**/*.html'],
+    //   defaultExtractor: content => content.match(/[\w-/:#]+(?<!:)/g) || []
+    // }),
   ];
   return gulp.src('src/css/tailwind.scss')
     .pipe(sass()) // scss -> css

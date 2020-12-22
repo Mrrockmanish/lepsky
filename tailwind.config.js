@@ -7,7 +7,7 @@ module.exports = {
       'xl': '1200px',
       'xxl': '1400px',
       '3xl': '1600px',
-      'hd': '1920px'
+      'hd': '1905px'
     },
 
     fontSize: {

@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 //маска телефона
   $('input[name="tel"]').mask("+7 (999) 999 99 99");
-  
+
   $('.offer-area__carousel').slick({
     appendArrows: $('.offer-area__arrows'),
     prevArrow: '<div class="offer-area__arrow offer-area__arrow_prev">\n' +
@@ -94,7 +94,7 @@ $(document).ready(function () {
   // console.log($('.artist-item'));
 
   // переключаем артистов
-  $('.artist-item').on('click', '.artists__list li:not(active)', function (){
+  $('.artist-item').on('click', '.artists__list li:not(active)', function () {
     const artistItem = $(this).closest('.artist-item');
     $(this).closest('.artist-item').find('li.active').removeClass('active');
     $(this).addClass('active');
@@ -105,7 +105,7 @@ $(document).ready(function () {
   // галерея
 
   const gallery = (galleryEl, delegateSelector) => {
-    galleryEl.each(function (){
+    galleryEl.each(function () {
       $(this).magnificPopup({
         delegate: delegateSelector,
         type: 'image',
@@ -120,7 +120,7 @@ $(document).ready(function () {
   gallery($('.models-gallery'), 'a');
 
   // отображаем названия прикреплённых файлов
-  $('.form-textarea__input').on('change', function (){
+  $('.form-textarea__input').on('change', function () {
     $('.form-textarea__files').text('');
     const files = document.getElementById('input-file').files;
 
@@ -145,38 +145,119 @@ $(document).ready(function () {
   // задаём высоту для видео
   const setHeightVideo = (iframeSelector) => {
     const width = $(iframeSelector).width();
-    $(iframeSelector).height(width*0.5625);
+    $(iframeSelector).height(width * 0.5625);
   };
   setHeightVideo('.video-item__iframe');
   setHeightVideo('.videos-right__iframe');
+  setHeightVideo('#player');
 
-  $(window).resize(function (){
+  $(window).resize(function () {
     setHeightVideo('.video-item__iframe');
     setHeightVideo('.videos-right__iframe');
+    setHeightVideo('#player');
   });
 
 
-  // $('.custom-item').on('click', '.custom-item__caption', function () {
-  //   $(this).next('.custom-item__content').fadeToggle();
-  // });
+  // const customCalc = () => {
+  //   const customItem = $('.custom-item').find('[data-price]:checked').toArray();
+  //   const pricesSum = customItem.map((item) => item.getAttribute('data-price'))
+  //     .reduce((acc, current) => {
+  //       return acc + Number(current);
+  //     }, 0);
+  //   $('.steps__price').text(pricesSum);
+  // };
+  //
+  // customCalc();
+  //
+  // $('.steps').on('change', 'input', function () {
+  //   customCalc();
+  // })
 
-  const customCalc = () => {
-    const customItem = $('.custom-item').find('[data-price]:checked').toArray();
-    const pricesSum = customItem.map((item) => item.getAttribute('data-price'))
-      .reduce((acc, current) => {
-        return acc + Number(current);
-      }, 0);
-    $('.steps__price').text(pricesSum);
+  const disable = (elementSelector) => {
+    $(elementSelector).closest('label').addClass('disabled');
+    $(elementSelector).attr('disabled', true);
+    $(elementSelector).prop('checked', false);
   };
 
-  customCalc();
+  const enable = (elementSelector) => {
+    $(elementSelector).closest('label').removeClass('disabled');
+    $(elementSelector).attr('disabled', false);
+  };
 
-  $('.steps').on('change', 'input', function (){
-    customCalc();
-  })
+  const dependence = () => {
+    const item = '.custom-item';
+    // 1. Если выбрал жареный клен то сквозной гриф не доступен. Соответственно если выбран сквозной гриф то жаренный клен не доступен)
+    // 2. Накладка. Если выбран материал грифа клен\жареный клен, то пункт “без накладки активен” в остальных случаях не активен
+    if ($(item).find(`[name="bracing"]:checked`).val() === 'Сквозной') {
+      disable(`${item} [value="Клен жареный"]`)
+    } else {
+      enable(`${item} [value="Клен жареный"]`);
+    }
+
+    if ($(item).find(`[name="material"]:checked`).val() === 'Клен жареный') {
+      disable(`${item} [value="Сквозной"]`);
+      enable(`${item} [value="Без накладки"]`)
+    } else {
+      enable(`${item} [value="Сквозной"]`);
+      disable(`${item} [value="Без накладки"]`)
+    }
+
+    // 3. Мензура. Если выбрана мультимензура, то доступен только фикс бридж
+
+    if ($(item).find(`[name="beaker"]:checked`).val() === 'Мультимензура 25,5 - 26,5') {
+      disable(`${item} [value="Floyd Rose Gotoh 1996t"]`);
+      disable(`${item} [value="Original Floyd Rose"]`);
+    } else {
+      enable(`${item} [value="Floyd Rose Gotoh 1996t"]`);
+      enable(`${item} [value="Original Floyd Rose"]`);
+    }
+
+
+
+
+
+  };
+
+
+  const displayProps = (propsArr) => {
+    $('.custom-calc-panel__props').html('');
+    propsArr.forEach(({propName, propVal, propId}) => {
+      $('.custom-calc-panel__props').append(`
+        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
+            ${propName}: ${propVal}
+        </div>
+      `);
+    });
+  };
+
+
+  const customShop = () => {
+    const items = [];
+
+    dependence();
+
+    $('[data-item]').each(function () {
+      const item = {
+        propId: [$(this).data('item')],
+        propName: (() => $(this).find('.custom-item__caption').text())(),
+        propVal: (() => $(this).find('.check:checked').val() ? $(this).find('.check:checked').val().toLowerCase() : '-')(),
+        price: (() => $(this).find('.check:checked').data('price') ? $(this).find('.check:checked').data('price') : 0)()
+      };
+      items.push(item);
+    });
+
+    displayProps(items);
+  };
+
+  customShop();
+
+  $('[data-item]').on('change', '.check', customShop);
+
+
+
 
   // табы
-  $('.custom-tabs').on('click', '.custom-tabs__tab:not(.active)', function (){
+  $('.custom-tabs').on('click', '.custom-tabs__tab:not(.active)', function () {
     const current = $(this).data('tab');
     $(this).closest('.custom-tabs').find('.custom-tabs__tab.active').removeClass('active');
     $(this).addClass('active');
@@ -185,13 +266,6 @@ $(document).ready(function () {
     $(this).closest('.custom-tabs').find(`.custom-tabs__content[data-tab="${current}"]`).addClass('active').fadeIn();
   })
 
-
-
-  $('[data-model]').on('change', function (){
-    $(this).closest('.steps').prev('.params-filter').hide();
-    $(this).closest('.step-one').hide();
-    $(this).closest('.step-one').next('.step-two').fadeIn();
-  });
 
   // ездиющий блок
   const slideBlock = (endPositionBlockSelector, slideBlockSelector) => {
@@ -203,7 +277,7 @@ $(document).ready(function () {
     if ($(endPositionBlockSelector)[0] !== undefined) {
       const endPosition = $(endPositionBlockSelector).offset().top - $(slideBlockSelector).outerHeight() - $('#guitar-content').offset().top + 100;
       // 100 это позиция прокрутки с которой блок начинает движение
-      $(window).scroll(function (){
+      $(window).scroll(function () {
         if ($(window).scrollTop() >= endPosition) {
           $(slideBlockSelector).css({
             'position': 'relative',
@@ -226,20 +300,20 @@ $(document).ready(function () {
   slideBlock('.endPosition', '.specifications');
 
   // проигрываем видео в live-videos
-  const playVideos = () => {
-    const firstVideoSrc = $('.videos-item')[0].getAttribute('data-video');
-    $('.videos-right iframe').attr('src', firstVideoSrc);
-
-    $('.videos-item').on('click', function (){
-      const dataVideo = $(this).data('video');
-      $('.videos-right iframe').attr('src', dataVideo).trigger('click');
-    });
-
-  };
-
-  if ($('.videos-item')[0] !== undefined) {
-    playVideos();
-  }
+  // const playVideos = () => {
+  //   const firstVideoSrc = $('.videos-item')[0].getAttribute('data-video');
+  //   $('.videos-right iframe').attr('src', firstVideoSrc);
+  //
+  //   $('.videos-item').on('click', function (){
+  //     const dataVideo = $(this).data('video');
+  //     $('.videos-right iframe').attr('src', dataVideo).trigger('click');
+  //   });
+  //
+  // };
+  //
+  // if ($('.videos-item')[0] !== undefined) {
+  //   playVideos();
+  // }
 
   // видео в попапе
   $('.video-link').magnificPopup({
@@ -264,14 +338,71 @@ $(document).ready(function () {
 
   //мобильное меню
 
-  $('.bars').on('click', function (){
+  $('.bars').on('click', function () {
     $('.mobile-menu').fadeIn();
     $('body').addClass('overflow-hidden');
   });
 
-  $('.mobile-menu__close').on('click', function (){
+  $('.mobile-menu__close').on('click', function () {
     $('.mobile-menu').fadeOut();
     $('body').removeClass('overflow-hidden');
-  })
+  });
+
+
+  $(function () {
+
+    const fadeSpeed = 200, // Fade Animation Speed
+
+      ajaxContainerSelector = '.ajax-container', // CSS Selector of Ajax Container
+      ajaxItemSelector = '.ajax-item', // CSS Selector of Ajax Item
+      ajaxFormSelector = '.ajax-form';
+
+    function ajaxMainFunction() {
+      $.ajax({
+        data: $(ajaxFormSelector).serialize(),
+        beforeSend: function () {
+
+          $('main').append("<svg width='100' height='100' version=\"1.1\" class=\"svg-loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 80 80\" xml:space=\"preserve\">\n" +
+            "\n" +
+            "\t<path id=\"spinner\" fill=\"#B1874E\" d=\"M40,72C22.4,72,8,57.6,8,40C8,22.4,\n" +
+            "\t\t22.4,8,40,8c17.6,0,32,14.4,32,32c0,1.1-0.9,2-2,2\n" +
+            "\t\ts-2-0.9-2-2c0-15.4-12.6-28-28-28S12,24.6,12,40s12.6,\n" +
+            "\t\t28,28,28c1.1,0,2,0.9,2,2S41.1,72,40,72z\">\n" +
+            "\n" +
+            "\t\t<animateTransform attributeType=\"xml\" attributeName=\"transform\" type=\"rotate\" from=\"0 40 40\" to=\"360 40 40\" dur=\"0.6s\" repeatCount=\"indefinite\"></animateTransform>\n" +
+            "\t</path>\n" +
+            "</svg>")
+        }
+      }).done(function (response) {
+        $('.svg-loader').remove();
+        const $response = $(response);
+
+        $(ajaxContainerSelector).fadeOut(fadeSpeed);
+
+        setTimeout(function () {
+          $(ajaxContainerSelector).html($response.find(ajaxContainerSelector).html()).fadeIn(fadeSpeed);
+          if ($('#player')[0]) {
+            const Scrollbar = window.Scrollbar;
+            Scrollbar.init($('.videos-left__inner')[0], {
+              alwaysShowTracks: true,
+              continuousScrolling: false
+            });
+            $('.videos-item').on('click', function () {
+              const dataVideo = $(this).data('video');
+              player.loadVideoById({
+                videoId: dataVideo
+              });
+            });
+          }
+
+        }, fadeSpeed);
+      });
+    }
+
+    $('' + ajaxFormSelector + ' input').change(function () {
+      ajaxMainFunction();
+    });
+  });
+
 
 });

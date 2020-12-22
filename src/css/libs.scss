@@ -1,5 +1,5 @@
 @import "../../node_modules/slick-carousel/slick/slick.scss";
-@import "../../node_modules/slick-carousel/slick/slick-theme.scss";
+@import "slick-theme";
 @import "../../node_modules/magnific-popup/dist/magnific-popup";
 @import '../../bower_components/arcticModal/arcticmodal/jquery.arcticmodal';
 
@@ -128,6 +128,20 @@ $gray: #626266;
 
   @media (min-width: 1200px) {
     display: block;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.svg-loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.products-carousel {
+  .slick-track {
     margin-left: 0;
     margin-right: 0;
   }
