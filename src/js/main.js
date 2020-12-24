@@ -173,88 +173,6 @@ $(document).ready(function () {
   //   customCalc();
   // })
 
-  const disable = (elementSelector) => {
-    $(elementSelector).closest('label').addClass('disabled');
-    $(elementSelector).attr('disabled', true);
-    $(elementSelector).prop('checked', false);
-  };
-
-  const enable = (elementSelector) => {
-    $(elementSelector).closest('label').removeClass('disabled');
-    $(elementSelector).attr('disabled', false);
-  };
-
-  const dependence = () => {
-    const item = '.custom-item';
-    // 1. Если выбрал жареный клен то сквозной гриф не доступен. Соответственно если выбран сквозной гриф то жаренный клен не доступен)
-    // 2. Накладка. Если выбран материал грифа клен\жареный клен, то пункт “без накладки активен” в остальных случаях не активен
-    if ($(item).find(`[name="bracing"]:checked`).val() === 'Сквозной') {
-      disable(`${item} [value="Клен жареный"]`)
-    } else {
-      enable(`${item} [value="Клен жареный"]`);
-    }
-
-    if ($(item).find(`[name="material"]:checked`).val() === 'Клен жареный') {
-      disable(`${item} [value="Сквозной"]`);
-      enable(`${item} [value="Без накладки"]`)
-    } else {
-      enable(`${item} [value="Сквозной"]`);
-      disable(`${item} [value="Без накладки"]`)
-    }
-
-    // 3. Мензура. Если выбрана мультимензура, то доступен только фикс бридж
-
-    if ($(item).find(`[name="beaker"]:checked`).val() === 'Мультимензура 25,5 - 26,5') {
-      disable(`${item} [value="Floyd Rose Gotoh 1996t"]`);
-      disable(`${item} [value="Original Floyd Rose"]`);
-    } else {
-      enable(`${item} [value="Floyd Rose Gotoh 1996t"]`);
-      enable(`${item} [value="Original Floyd Rose"]`);
-    }
-
-
-
-
-
-  };
-
-
-  const displayProps = (propsArr) => {
-    $('.custom-calc-panel__props').html('');
-    propsArr.forEach(({propName, propVal, propId}) => {
-      $('.custom-calc-panel__props').append(`
-        <div class="w-full sm:w-1/2 lg:w-1/3 xxl:w-full px-4 mt-4">
-            ${propName}: ${propVal}
-        </div>
-      `);
-    });
-  };
-
-
-  const customShop = () => {
-    const items = [];
-
-    dependence();
-
-    $('[data-item]').each(function () {
-      const item = {
-        propId: [$(this).data('item')],
-        propName: (() => $(this).find('.custom-item__caption').text())(),
-        propVal: (() => $(this).find('.check:checked').val() ? $(this).find('.check:checked').val().toLowerCase() : '-')(),
-        price: (() => $(this).find('.check:checked').data('price') ? $(this).find('.check:checked').data('price') : 0)()
-      };
-      items.push(item);
-    });
-
-    displayProps(items);
-  };
-
-  customShop();
-
-  $('[data-item]').on('change', '.check', customShop);
-
-
-
 
   // табы
   $('.custom-tabs').on('click', '.custom-tabs__tab:not(.active)', function () {
@@ -298,22 +216,6 @@ $(document).ready(function () {
   };
 
   slideBlock('.endPosition', '.specifications');
-
-  // проигрываем видео в live-videos
-  // const playVideos = () => {
-  //   const firstVideoSrc = $('.videos-item')[0].getAttribute('data-video');
-  //   $('.videos-right iframe').attr('src', firstVideoSrc);
-  //
-  //   $('.videos-item').on('click', function (){
-  //     const dataVideo = $(this).data('video');
-  //     $('.videos-right iframe').attr('src', dataVideo).trigger('click');
-  //   });
-  //
-  // };
-  //
-  // if ($('.videos-item')[0] !== undefined) {
-  //   playVideos();
-  // }
 
   // видео в попапе
   $('.video-link').magnificPopup({
@@ -403,6 +305,4 @@ $(document).ready(function () {
       ajaxMainFunction();
     });
   });
-
-
 });

@@ -104,6 +104,17 @@ function Js() {
     .pipe(gulp.dest('build/js/'));
 }
 
+function customShopJs() {
+  return gulp.src('src/js/custom-shop.js') // получим файл main.js
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(plumber()) // для отслеживания ошибок
+    .pipe(rigger()) // импортируем все указанные файлы в main.js
+    .pipe(uglify()) // минимизируем js
+    .pipe(gulp.dest('build/js/'));
+}
+
 function libsJs() {
   return gulp.src('src/js/libs.js') // получим файл main.js
     .pipe(plumber()) // для отслеживания ошибок
@@ -138,6 +149,7 @@ function watch_files() {
   gulp.watch('src/css/libs.scss', gulp.series(tailwindCss, reload));
   gulp.watch('src/**/*.html', gulp.series(minifyHtml, reload));
   gulp.watch('src/js/main.js', gulp.series(Js, reload));
+  gulp.watch('src/js/custom-shop.js', gulp.series(customShopJs, reload));
   gulp.watch('src/js/libs.js', gulp.series(libsJs, reload));
   gulp.watch('src/fonts/**/*.*', gulp.series(fonts, reload));
   gulp.watch('src/img/**/*.*', gulp.series(images, reload));
@@ -166,7 +178,7 @@ function reload(done) {
 // сборка
 gulp.task('build',
   gulp.series(delBuild,
-    gulp.parallel(minifyHtml, css, cssLibs, tailwindCss, Js, libsJs, fonts, images)
+    gulp.parallel(minifyHtml, css, cssLibs, tailwindCss, Js, customShopJs, libsJs, fonts, images)
   )
 );
 
