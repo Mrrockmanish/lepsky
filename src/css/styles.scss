@@ -393,6 +393,7 @@ h4 {
 }
 
 .product-item {
+  flex-shrink: 0;
   &__inner {
     max-width: s(384);
     position: relative;
@@ -514,6 +515,14 @@ h4 {
   }
   &__list {
 
+    .scroll-content {
+      flex-direction: column;
+    }
+
+    &-wrap {
+      height: s(300);
+    }
+
     li {
       cursor: pointer;
       font-size: s(18);
@@ -527,6 +536,12 @@ h4 {
       pointer-events: none;
       cursor: none;
     }
+  }
+}
+
+.artist-photo-2 {
+  img {
+    max-width: s(768);
   }
 }
 
@@ -628,7 +643,7 @@ h4 {
 .play-icon {
   width: s(48);
   height: s(48);
-  background: rgba(177, 134, 78, 0.5);
+  background: rgba(255, 0, 0, 0.8);
   border-radius: 1rem;
   left: 50%;
   top: 50%;
@@ -655,11 +670,9 @@ h4 {
 }
 
 .param-button {
-  width: 33.3333%;
   font-size: s(14);
 
   @media (min-width: 375px) {
-    width: 33.3333%;
     font-size: s(16);
   }
 
@@ -681,6 +694,14 @@ h4 {
       background: #6A6A6A;
     }
   }
+
+  &.active {
+    .param-button__checkbox-custom {
+      background-color: #D0D0D0;
+      color: #252525;
+      pointer-events: none;
+    }
+  }
 }
 
 .param-button__checkbox:checked + .param-button__checkbox-custom {
@@ -697,6 +718,10 @@ h4 {
   color: $bg;
   font-weight: 300;
   font-size: s(14);
+
+  &.error {
+    box-shadow: 0 0 0 2px $brown;
+  }
 }
 
 .form-textarea {
@@ -1138,4 +1163,9 @@ label.disabled {
 
 main {
   min-height: s(1100);
+}
+
+.artist-social {
+  width: 3rem;
+  height: 3rem;
 }

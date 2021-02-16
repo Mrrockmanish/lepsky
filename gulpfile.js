@@ -111,7 +111,6 @@ function customShopJs() {
     }))
     .pipe(plumber()) // для отслеживания ошибок
     .pipe(rigger()) // импортируем все указанные файлы в main.js
-    .pipe(uglify()) // минимизируем js
     .pipe(gulp.dest('build/js/'));
 }
 

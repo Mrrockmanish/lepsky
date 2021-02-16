@@ -146,3 +146,29 @@ $gray: #626266;
     margin-right: 0;
   }
 }
+
+.error-block {
+  display: block;
+  line-height: 1.2;
+  margin-top: s(8);
+  font-size: s(14);
+
+  .error {
+    color: #B1874E!important;
+  }
+}
+
+.artist-right {
+  .svg-loader {
+    position: absolute!important;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.process-carousel__carousel {
+  iframe {
+    min-width: s(290)!important;
+  }
+}

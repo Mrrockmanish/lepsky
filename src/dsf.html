@@ -1,0 +1,42 @@
+<div class="offer-area relative">
+    <div class="offer-area__carousel-wrap relative">
+        <div class="offer-area__arrows flex absolute z-10"></div>
+        <div class="offer-area__carousel">
+            [[getImageList?
+            &docid=`[[*id]]`
+            &limit=`12`
+            &tvname=`main-slider`
+            &tpl=`main-carousel-slide`
+            ]]
+        </div>
+    </div>
+    <div class="process flex flex-wrap lg:flex-nowrap xl:absolute mt-16 xl:mt-0">
+        <div class="process__left w-full lg:w-auto pt-5 pb-8 lg:pr-6 xl:px-8 xxl:px-12 hd:px-16">
+            <div class="process__title">[[*create-title]]</div>
+            <div class="text-base mt-2" style="max-width: 27.3rem">
+                [[*create-desc]]
+            </div>
+            <div class="mt-6">
+                <a href="[[~[[*create-link]]]]" class="more flex items-center">
+                        <span class="mr-4">
+                            Процесс
+                        </span>
+                    <svg class="more__arrow" width="32" height="8" viewBox="0 0 32 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M31.3536 4.35356C31.5488 4.15829 31.5488 3.84171 31.3536 3.64645L28.1716 0.464469C27.9763 0.269206 27.6597 0.269206 27.4645 0.464468C27.2692 0.659731 27.2692 0.976313 27.4645 1.17158L30.2929 4L27.4645 6.82843C27.2692 7.02369 27.2692 7.34027 27.4645 7.53554C27.6597 7.7308 27.9763 7.7308 28.1716 7.53554L31.3536 4.35356ZM-4.37114e-08 4.5L31 4.5L31 3.5L4.37114e-08 3.5L-4.37114e-08 4.5Z" fill="white"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="process__right video-link flex flex-shrink-0 relative bg-no-repeat bg-center bg-cover mt-6 lg:mt-0" style="background-image:url([[*create-img]]);">
+
+        </div>
+        <!-- <a href="https://www.youtube.com/watch?v=[[*create-video]]" class="process__right video-link flex-shrink-0 relative bg-no-repeat bg-center bg-cover hover-effect mt-6 lg:mt-0" style="background-image:url(img/images/process.jpg);">
+            <div class="play-icon absolute flex items-center justify-center">
+                <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 7L3.01142e-07 13.9282L9.06825e-07 0.0717964L12 7Z" fill="white"/>
+                </svg>
+            </div>
+        </a> -->
+    </div>
+</div>
+

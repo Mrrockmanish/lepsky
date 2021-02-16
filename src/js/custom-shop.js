@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  // базовая цена
+  const basePrice = 1000;
+  // курс доллара
+  const dollarCourse = 1;
 
   // отключаем вариант
   const disable = (elementSelector) => {
@@ -22,85 +26,113 @@ $(document).ready(function () {
 
   // зависимости выбранных вариантов
   const dependence = () => {
-    const item = '.custom-item';
+    let bracing = $('[name="bracing"]:checked').val(); // тип крепления
+    let material = $('[name="material"]:checked').val(); // материал грифа
+    let beaker = $('[name="beaker"]:checked').val(); // мензура
+    let radius = $('[name="radius"]:checked').val(); // радиус накладки
+    let neckBanding = $('[name="neckBanding"]:checked').val(); // окантовка грифа
+    let topMaterial = $('[name="topMaterial"]:checked').val(); // материал топа
+    let bridgeType = $('[name="bridge-type"]:checked').val(); // тип бриджа
+    let pickupType = $('[name="pickup-type"]:checked').val(); // конфигурация звукоснимателей
+    let pickgard = $('[name="pickgard"]:checked').val(); // пикгард
 
     enable(`.check`);
 
-    // 1. Если выбрал жареный клен то сквозной гриф не доступен. Соответственно если выбран сквозной гриф то жаренный клен не доступен)
-
-    if ($(item).find(`[name="bracing"]:checked`).val() === 'Сквозной') {
-      disable(`${item} [value="Клен жареный"]`)
+    // Если выбрал жареный клен то сквозной гриф не доступен.
+    if (material === 'Клен термостабилизированный (Roasted)') {
+      disable('[data-item="bracing"] [value="Сквозной"]');
+    }
+    // Соответственно если выбран сквозной гриф то жаренный клен не доступен)
+    if (bracing === 'Сквозной') {
+      disable('[data-item="material"] [value="Клен термостабилизированный (Roasted)"]');
     }
 
-    if ($(item).find(`[name="material"]:checked`).val() === 'Клен жареный') {
-      disable(`${item} [value="Сквозной"]`);
-    }
-
-    // 2. Накладка. Если выбран материал грифа клен\жареный клен, то пункт “без накладки активен” в остальных случаях не активен
-
-    if ($(item).find(`[name="material"]:checked`).val() === 'Клен жареный' ||
-      $(item).find(`[name="material"]:checked`).val() === 'Клен цельный') {
-      enable(`${item} [value="Без накладки"]`)
+    // Накладка. Если выбран материал грифа клен\жареный клен, то пункт “без накладки активен” в остальных случаях не активен
+    if (material === 'Клен термостабилизированный (Roasted)') {
+      enable('[data-item="facingMaterial"] [value="Без накладки"]');
     } else {
-      disable(`${item} [value="Без накладки"]`)
+      disable('[data-item="facingMaterial"] [value="Без накладки"]');
     }
-    // Мензура. Если выбрана мультимензура  фикс бридж
 
-    if ($(item).find(`[name="beaker"]:checked`).val() === 'Мультимензура 25,5 - 26,5') {
-      disable(`${item} [value="Floyd Rose Gotoh 1996t"]`);
-      disable(`${item} [value="Original Floyd Rose"]`);
-      disable(`${item} [value="Tremolo Gotoh 510TS"]`);
-      disable(`${item} [value="Tremolo Gotoh 510TS подвешенное"]`);
+
+    // Мензура. Если выбрана мультимензура  фикс бридж
+    if (beaker === 'Мультимензура 25,5" - 27"') {
+      disable('[data-item="bridge-type"] [value="Tremolo 1996T"]');
+      disable('[data-item="bridge-type"] [value="Original Floyd Rose"]');
+      disable('[data-item="bridge-type"] [value="Tremolo Gotoh 510TS на корпусе"]');
+      disable('[data-item="bridge-type"] [value="Tremolo Gotoh 510TS (recessed)"]');
     }
 
     // Радиус накладки. Если выбран 12” то доступны все бриджи. Если выбрал 16” то OFR не доступен. Если выбран Мультирадиус, (OFR не доступен)
-
-    if ($(item).find(`[name="radius"]:checked`).val() === '16' ||
-      $(item).find(`[name="radius"]:checked`).val() === 'Мультирадиус 25,5 - 26,5') {
-      disable(`${item} [value="Original Floyd Rose"]`)
+    if (radius === '16"' || radius === 'Мультирадиус 12" - 16"') {
+      disable('[data-item="bridge-type"] [value="Original Floyd Rose"]')
+      disable('[data-item="bridge-type"] [value="Tremolo 1996T"]')
+    }
+    // Non-Fine Tuner Tremolo System доступен только у радиуса 16
+    if (radius === '12"' || radius === 'Мультирадиус 12" - 16"') {
+      disable('[data-item="bridge-type"] [value="Non-Fine Tuner Tremolo System"]')
     }
 
-
     // 4. Окантовка. Если выбран пластик, то маркеры боковой разметки (перл, клен, эбен не активны)
-
-    if ($(item).find(`[name="neckBanding"]:checked`).val() === 'Пластиковая накладка') {
-      disable(`${item} [value="Блоки перламутр"]`);
-      disable(`${item} [value="Блоки клен"]`);
-      disable(`${item} [value="Блоки эбен"]`);
+    if (neckBanding === 'Пластик по накладке') {
+      disable('[data-item="sideMarkers"] [value="Блоки перламутр"]');
+      disable('[data-item="sideMarkers"] [value="Блоки клен"]');
+      disable('[data-item="sideMarkers"] [value="Блоки эбен"]');
     }
 
     // Покрытие. Если топ не выбран, то “Глянец топ” не доступен
-
-    if ($(item).find(`[name="topMaterial"]:checked`).val() === 'Без топа') {
-      disable(`${item} [value="Глянец топ"]`);
-      disable(`${item} [value="Тонкое матовое (задняя сторона)"]`);
+    if (topMaterial === 'Без топа' || topMaterial === 'Карвдека без топа') {
+      disable('[data-item="cover"] [value="Топ глянец /корпус тонкое матовое"]');
     }
 
-    // Тип бриджа. Если выбрал Floyd Rose, то порожек Top Lock
-    if ($(item).find(`[name="bridge"]:checked`).val() === 'Original Floyd Rose') {
-      select(`${item} [value="Top Lock"]`);
+    // Тип бриджа. Если выбрал Floyd Rose, то порожек Locking nut
+    if (bridgeType === 'Original Floyd Rose' || bridgeType === 'Tremolo 1996T') {
+      select('[data-item="nut"] [value="Locking nut"]');
     }
 
+    // Натуральный кант доступен если выбран материал топа - Клен (любой)
 
-    if ($(item).find(`[name="topMaterial"]:checked`).val() === 'Клен простой книжка 4А' ||
-      $(item).find(`[name="topMaterial"]:checked`).val() === 'Клен пламенный книжка 5А' ||
-      $(item).find(`[name="topMaterial"]:checked`).val() === 'Клен облачко книжка 5А' ||
-      $(item).find(`[name="topMaterial"]:checked`).val() === 'Клен пламенный цельный 4А' ||
-      $(item).find(`[name="topMaterial"]:checked`).val() === 'Клен облачко цельный 4А') {
-      enable(`${item} [value="Натуральный кант"]`);
+
+    if (topMaterial === 'Клен простой' ||
+      topMaterial === 'Клен пламенный книжка 4А' ||
+      topMaterial === 'Клен пламенный книжка 5А' ||
+      topMaterial === 'Клен облачко книжка 4А' ||
+      topMaterial === 'Клен облачко книжка 5А' ||
+      topMaterial === 'Клен пламенный цельный 4А' ||
+      topMaterial === 'Клен облачко цельный 4А' ||
+
+      topMaterial === 'Карвтоп клен простой книжка' ||
+      topMaterial === 'Карвтоп клен пламенный книжка 4А' ||
+      topMaterial === 'Карвтоп клен пламенный книжка 5А' ||
+      topMaterial === 'Карвтоп клен облачко книжка 4А') {
+      enable('[data-item="edging"] [value="Натуральный кант"]');
     } else {
-      disable(`${item} [value="Натуральный кант"]`);
+      disable('[data-item="edging"] [value="Натуральный кант"]');
     }
 
     // Если выбраны HSH HSS SSS то переключатель на 5 позиций
-    // Если выбран HS то переключатель на 4 позиции
-    // Если выбран НН то 3 или 5 позиций
+    // Если выбран HS то переключатель на 3 позиции
+    // Если выбран НН все активны
 
-    // if ($(item).find(`[name="pickup-type"]:checked`).val() === 'HSH' ||
-    //   $(item).find(`[name="pickup-type"]:checked`).val() === 'HSS' ||
-    //   $(item).find(`[name="pickup-type"]:checked`).val() === 'SSS') {
-    //   select(`${item} [value="Top Lock"]`);
-    // }
+    if (pickupType === 'HSH' || pickupType === 'HSS' || pickupType === 'SSS') {
+      disable('[data-item="electronics"] [value="1 громкость,1тон, переключатель 3 позиции"]');
+      disable('[data-item="electronics"] [value="1 громкость пуш-пулл отсечки, 1 тон, переключатель 3 позиции"]');
+    }
+    if (pickupType === 'HS') {
+
+      disable('[data-item="electronics"] [value="1 громкость,1 тон, переключатель 5 позиций"]');
+      disable('[data-item="electronics"] [value="1 громкость, переключатель 5 позиций с отсечками"]');
+    }
+
+    // если выбран пикгард то скрываем крышки электроники
+
+    if (pickgard === 'Нет') {
+      enable('[data-item="lid"] [value="Пластик"]');
+      enable('[data-item="lid"] [value="Дерево"]');
+    } else {
+      disable('[data-item="lid"] [value="Пластик"]');
+      disable('[data-item="lid"] [value="Дерево"]');
+    }
 
   };
 
@@ -165,8 +197,8 @@ $(document).ready(function () {
     const item = '.custom-item';
     let  pickupsSum = 0;
 
-    const brand = $(item).find(`[name="pickup-brand"]:checked`).val();
-    const type = $(item).find(`[name="pickup-type"]:checked`).val();
+    const brand = $(`[name="pickup-brand"]:checked`).val();
+    const type = $(`[name="pickup-type"]:checked`).val();
 
     if (brand && type) {
       pickupsSum = pickups[brand][type];
@@ -175,26 +207,42 @@ $(document).ready(function () {
     return pickupsSum;
   };
 
+  // считаем добавочные цены
+  const additionalPrice = () => {
+    // добавочная цена крышки электроники
+    let lid = 0;
+
+    // если крышка электроники дерево и покрытие глянец, то добавляем стоимость
+    if ( $('.custom-item[data-item="lid"]').find('[value="Дерево"]').prop('checked') &&
+      $('.custom-item[data-item="cover"]').find('[value="Глянец"]').prop('checked') ) {
+      lid = 50;
+    } else  lid = 0;
+
+    return lid;
+  };
+
 
   // считаем окончательную цену
   const makePrice = (propsArr) => {
 
-    const basePrice = 1000;
-    const dollarCourse = 75;
-
+    // цена звукоснимателей
     const addPickupsPrice = calcPickups();
+    // дополнительная стоимость с учетом зависимостей
+    const additional = additionalPrice();
+
 
     // фильтруем убирая конфигурацию звукоснимателей и бренды
     const filtered = propsArr.filter(({propId}) => propId !== 'pickup-brand' && propId !== 'pickup-type');
 
     const calcFiltered = filtered.reduce((acc, {price}) => {
       return acc + price;
-    }, basePrice + addPickupsPrice);
+    }, basePrice);
 
-    const totalPrice = calcFiltered * dollarCourse;
+    // получаем окончательную стоимость
+    const totalPrice = (calcFiltered + addPickupsPrice + additional) * dollarCourse;
 
     // отображаем цену на странице
-    $('.custom-calc-panel').find('.total-price').text(totalPrice);
+    $('.custom-calc-panel').find('.total-price').text(totalPrice.toLocaleString('ru-RU'));
   };
 
   // главная функция

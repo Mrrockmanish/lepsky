@@ -5,7 +5,8 @@
       <paths name="topsone.beget.tech">
         <serverdata>
           <mappings>
-            <mapping deploy="/webdew.su/public_html" local="$PROJECT_DIR$/build" web="/" />
+            <mapping deploy="/Lepsky_en/public_html/css" local="$PROJECT_DIR$/build/css" web="/" />
+            <mapping deploy="/Lepsky_en/public_html/js" local="$PROJECT_DIR$/build/js" />
           </mappings>
         </serverdata>
       </paths>

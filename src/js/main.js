@@ -1,5 +1,40 @@
 $(document).ready(function () {
 
+  // действие после отправки форм
+
+  $(document).on('af_complete', function(event, response) {
+    const form = response.form;
+    // Если у формы определённый id
+    // Если у формы определённый класс
+    if (response.success == true) {
+
+      if (form.hasClass("artist-form")) {
+        $('.artist-modal').arcticmodal('close');
+      }
+
+      if (form.hasClass("question-form")) {
+        $('.info-modal').arcticmodal('close');
+      }
+      if (form.hasClass("order-form")) {
+        $('.buy-modal').arcticmodal('close');
+      }
+
+      if (form.hasClass("file-form")) {
+        $('.form-textarea__input').val('');
+        $('.form-textarea__files').html('');
+      }
+
+      $('.thanks-modal').arcticmodal();
+
+      setTimeout("$('.thanks-modal').arcticmodal('close')", 3000);
+    }
+    // Иначе печатаем в консоль весь ответ
+    else {
+      console.log(response);
+    }
+  });
+
+
 //маска телефона
   $('input[name="tel"]').mask("+7 (999) 999 99 99");
 
@@ -23,6 +58,7 @@ $(document).ready(function () {
   });
 
 
+  // карусель продуктов
   $('.products-carousel').slick({
     slidesToScroll: 4,
     slidesToShow: 4,
@@ -63,43 +99,87 @@ $(document).ready(function () {
     infinite: false
   });
 
+ // карусель видео из инстаграм
+  $('.process-carousel__carousel').slick({
+    slidesToScroll: 4,
+    slidesToShow: 4,
+    touchMove: false,
+    appendArrows: $('.process-carousel .small-arrows'),
+    prevArrow: '<div class="small-arrows__arrow small-arrows_prev">\n' +
+      '              <svg width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
+      '                     <path d="M0.646446 3.64645C0.451185 3.84171 0.451185 4.15829 0.646446 4.35356L3.82843 7.53554C4.02369 7.7308 4.34027 7.7308 4.53553 7.53554C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976312 4.7308 0.65973 4.53553 0.464468C4.34027 0.269205 4.02369 0.269205 3.82843 0.464468L0.646446 3.64645ZM17 3.5L1 3.5L1 4.5L17 4.5L17 3.5Z" fill="white"/>\n' +
+      '              </svg>\n' +
+      '          </div>',
+    nextArrow: '<div class="small-arrows__arrow small-arrows_next">\n' +
+      '               <svg width="17" height="8" viewBox="0 0 17 8" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
+      '                      <path d="M16.3536 4.35356C16.5488 4.15829 16.5488 3.84171 16.3536 3.64645L13.1716 0.464468C12.9763 0.269206 12.6597 0.269206 12.4645 0.464468C12.2692 0.65973 12.2692 0.976313 12.4645 1.17158L15.2929 4L12.4645 6.82843C12.2692 7.02369 12.2692 7.34027 12.4645 7.53554C12.6597 7.7308 12.9763 7.7308 13.1716 7.53554L16.3536 4.35356ZM-8.74228e-08 4.5L16 4.5L16 3.5L8.74228e-08 3.5L-8.74228e-08 4.5Z" fill="white"/>\n' +
+      '               </svg>\n' +
+      '         </div>',
+    responsive: [
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToScroll: 3,
+          slidesToShow: 3,
+          touchMove: false
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToScroll: 1,
+          slidesToShow: 1,
+          touchMove: false
+        }
+      }
+    ],
+    infinite: false
+  });
 
-  // отображаем изображения и информацию по активному артисту
-  const showArtist = (artistItem) => {
-
-    if (artistItem.length > 0) {
-      const activeItem = artistItem.find('.artists__list li.active');
-      const bg = activeItem.data('bg');
-      const img = activeItem.data('preview');
-      const band = activeItem.data('band');
-      const guitarsArr = () => activeItem.data('guitars').split(',');
-      const guitars = guitarsArr();
-
-      artistItem.css(
-        'background-image', 'linear-gradient(90deg, #2C2C2C 8.72%, rgba(44, 44, 44, 0.6) 86.66%),' + 'url(' + bg + ')'
-      );
-      artistItem.find('.artist-item__img').css(
-        'background-image', 'url(' + img + ')'
-      );
-      artistItem.find('.artist-item__band').text(band);
-
-      guitars.forEach((element) => {
-        $('.artist-item__guitars').append(element + '<br>');
-      });
-    }
-  };
-
-  showArtist($('.artist-item'));
-
-  // console.log($('.artist-item'));
 
   // переключаем артистов
-  $('.artist-item').on('click', '.artists__list li:not(active)', function () {
-    const artistItem = $(this).closest('.artist-item');
-    $(this).closest('.artist-item').find('li.active').removeClass('active');
+  $('.artists__list').on('click', 'li:not(active)', function () {
+
+    $(this).closest('.artists__list').find('li.active').removeClass('active');
     $(this).addClass('active');
-    $('.artist-item__guitars').text('');
-    showArtist(artistItem);
+
+    // Берем действие из атрибута data-action ссылки
+    const id = $(this).data('action');
+
+    // Берем действие из атрибута data-action ссылки
+    var action = $(this).data('action');
+
+    // Ajax запрос к текущей страницы (а на ней наш сниппет) методом post
+    // $.post(document.location.href, {action: action}, function(data) {
+    //   // Выдаем ответ
+    //   $('.artists__right').html(data);
+    // });
+
+    $.ajax({
+      url: document.location.href,
+      method: 'POST',
+      data: {action: action},
+      beforeSend: function () {
+        // $('.artists__right-content').fadeOut();
+        $('.artists__right').append("<svg style='position: absolute' width='100' height='100' version=\"1.1\" class=\"svg-loader\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\" viewBox=\"0 0 80 80\" xml:space=\"preserve\">\n" +
+          "\n" +
+          "\t<path id=\"spinner\" fill=\"#B1874E\" d=\"M40,72C22.4,72,8,57.6,8,40C8,22.4,\n" +
+          "\t\t22.4,8,40,8c17.6,0,32,14.4,32,32c0,1.1-0.9,2-2,2\n" +
+          "\t\ts-2-0.9-2-2c0-15.4-12.6-28-28-28S12,24.6,12,40s12.6,\n" +
+          "\t\t28,28,28c1.1,0,2,0.9,2,2S41.1,72,40,72z\">\n" +
+          "\n" +
+          "\t\t<animateTransform attributeType=\"xml\" attributeName=\"transform\" type=\"rotate\" from=\"0 40 40\" to=\"360 40 40\" dur=\"0.6s\" repeatCount=\"indefinite\"></animateTransform>\n" +
+          "\t</path>\n" +
+          "</svg>");
+      }
+    }).done(function (data) {
+      setTimeout(function (){
+        $('.artists__right').find('.svg-loader').remove();
+        $('.artists__right-content').html(data);
+      }, 600);
+
+    })
+
   });
 
   // галерея
@@ -117,7 +197,8 @@ $(document).ready(function () {
   };
 
   gallery($('.process-block'), 'a');
-  gallery($('.models-gallery'), 'a');
+  gallery($('.models-gallery'), '.models-process-item ');
+  gallery($('.guitar-photos'), 'a');
 
   // отображаем названия прикреплённых файлов
   $('.form-textarea__input').on('change', function () {
@@ -142,6 +223,10 @@ $(document).ready(function () {
     $('.info-modal').arcticmodal();
   });
 
+  $('.artist-call').on('click', function () {
+    $('.artist-modal').arcticmodal();
+  });
+
   // задаём высоту для видео
   const setHeightVideo = (iframeSelector) => {
     const width = $(iframeSelector).width();
@@ -156,22 +241,6 @@ $(document).ready(function () {
     setHeightVideo('.videos-right__iframe');
     setHeightVideo('#player');
   });
-
-
-  // const customCalc = () => {
-  //   const customItem = $('.custom-item').find('[data-price]:checked').toArray();
-  //   const pricesSum = customItem.map((item) => item.getAttribute('data-price'))
-  //     .reduce((acc, current) => {
-  //       return acc + Number(current);
-  //     }, 0);
-  //   $('.steps__price').text(pricesSum);
-  // };
-  //
-  // customCalc();
-  //
-  // $('.steps').on('change', 'input', function () {
-  //   customCalc();
-  // })
 
 
   // табы
@@ -230,12 +299,16 @@ $(document).ready(function () {
 
     Scrollbar.init(content, {
       alwaysShowTracks: true,
-      continuousScrolling: false
+      continuousScrolling: true
     });
   };
 
   if ($('.videos-left__inner')[0]) {
     beautyScroll($('.videos-left__inner')[0]);
+  }
+
+  if ($('.artists__list')[0]) {
+    beautyScroll($('.artists__list')[0]);
   }
 
   //мобильное меню
@@ -305,4 +378,18 @@ $(document).ready(function () {
       ajaxMainFunction();
     });
   });
+
+  // останавливаем воспроизведение активного видео по клику на другое видео
+  $('.process-carousel__carousel').on('click touch', '.process-carousel__video:not(.active)', function (){
+    $('.process-carousel__carousel').find('.process-carousel__video.active')[0].pause();
+    $('.process-carousel__carousel').find('.process-carousel__video.active').removeClass('active');
+    $(this).addClass('active');
+    $(this)[0].play();
+  });
+  // по пролистыванию слайдера
+  $('.process-carousel__carousel').on('afterChange', function(event, slick, currentSlide, nextSlide){
+    $(this).find('.process-carousel__video.active')[0].pause();
+  });
+
+
 });
