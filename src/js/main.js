@@ -392,4 +392,16 @@ $(document).ready(function () {
   });
 
 
+  // открывание опций в преордере
+
+  $('.custom-item_bg').on('click', '.custom-item__caption:not(.open)', function (){
+    $('.custom-item_bg').find('.custom-item__caption.open').removeClass('open');
+    $('.custom-item_bg').find('.custom-item__content.open').removeClass('open');
+    $(this).addClass('open');
+  });
+
+  $('.custom-item_bg').on('click', '.custom-item__caption', function (){
+    $(this).next().toggleClass('open');
+  });
+
 });
