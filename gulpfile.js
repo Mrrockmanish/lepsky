@@ -43,11 +43,6 @@ function css() {
     tailwindcss(),
     autoprefixer({ overrideBrowserslist: ['last 4 version'] }),
     cssnano(),
-    // purgecss({
-    //   content: ['build/*.html'],
-    //   defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
-    // }),
-
   ];
   return gulp.src('src/css/styles.scss')
     .pipe(plumber()) // для отслеживания ошибок
@@ -122,6 +117,21 @@ function libsJs() {
     .pipe(gulp.dest('build/js/'));
 }
 
+function lodash() {
+  return gulp.src('src/js/lodash.js') // получим файл main.js
+    .pipe(gulp.dest('build/js/'));
+}
+
+function preOrder() {
+  return gulp.src('src/js/preorder.js') // получим файл main.js
+    .pipe(babel({
+      presets: ['@babel/env']
+    }))
+    .pipe(plumber()) // для отслеживания ошибок
+    .pipe(rigger()) // импортируем все указанные файлы в main.js
+    .pipe(gulp.dest('build/js/'));
+}
+
 function fonts() {
   return gulp.src('src/fonts/**/*.*')
     .pipe(gulp.dest('build/fonts/'));
@@ -149,6 +159,7 @@ function watch_files() {
   gulp.watch('src/**/*.html', gulp.series(minifyHtml, reload));
   gulp.watch('src/js/main.js', gulp.series(Js, reload));
   gulp.watch('src/js/custom-shop.js', gulp.series(customShopJs, reload));
+  gulp.watch('src/js/preorder.js', gulp.series(preOrder, reload));
   gulp.watch('src/js/libs.js', gulp.series(libsJs, reload));
   gulp.watch('src/fonts/**/*.*', gulp.series(fonts, reload));
   gulp.watch('src/img/**/*.*', gulp.series(images, reload));
@@ -177,7 +188,7 @@ function reload(done) {
 // сборка
 gulp.task('build',
   gulp.series(delBuild,
-    gulp.parallel(minifyHtml, css, cssLibs, tailwindCss, Js, customShopJs, libsJs, fonts, images)
+    gulp.parallel(minifyHtml, css, cssLibs, tailwindCss, Js, lodash, customShopJs, preOrder, libsJs, fonts, images)
   )
 );
 

@@ -172,3 +172,19 @@ $gray: #626266;
     min-width: s(290)!important;
   }
 }
+
+.z {
+  &-70 {
+    z-index: 70;
+  }
+  &-60 {
+    z-index: 60;
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .6s!important;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}

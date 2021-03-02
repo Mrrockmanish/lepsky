@@ -268,6 +268,11 @@ a {
       height: s(48);
     }
   }
+
+  &_bg-transparent {
+    background-color: transparent;
+    border: s(1) solid $brown;
+  }
 }
 
 .aside {
@@ -930,7 +935,7 @@ h4 {
   &_pickgard {
     right: s(55);
     min-width: s(187);
-    top: s(305);
+    top: 16.6rem;
 
     .custom-item__dots-wrap {
       &::before {
@@ -1423,6 +1428,7 @@ label.disabled {
 
 main {
   min-height: s(1100);
+  overflow: hidden;
 }
 
 .artist-social {
@@ -1436,37 +1442,213 @@ main {
   }
 }
 
+.props-area {
+  &.order-ready {
+    animation-duration: .3s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+
+    @media (min-width: 1200px) {
+      animation-name: props-hide;
+    }
+  }
+  &.order-ready-no {
+    animation-duration: .6s;
+    animation-fill-mode: both;
+    animation-delay: .8s;
+    animation-timing-function: ease-out;
+
+    @media (min-width: 1200px) {
+      animation-name: props-show;
+    }
+  }
+}
+
+@keyframes props-hide {
+  from {
+    opacity: 1;
+    z-index: 1;
+  }
+  to {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@keyframes props-show {
+  from {
+    opacity: 0;
+    z-index: -1;
+  }
+  to {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+
 .guitar-area {
   width: 100%;
   height: 44rem;
   margin-left: auto;
   margin-right: auto;
-  background-repeat: no-repeat;
-  background-position: left bottom;
-  background-size: contain;
+
+  &__bg {
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+
+    @media (min-width: 768px) {
+      background-size: auto;
+    }
+
+    @media (min-width: 1200px) {
+      background-size: auto;
+    }
+  }
 
   @media (min-width: 768px) {
-    background-size: auto;
     height: s(1090);
   }
 
   @media (min-width: 1200px) {
-    background-size: auto;
     margin-right: 0;
     width: s(881);
-    height: s(1780);
+    height: s(2050);
     right: s(83);
-    transform: translateY(- 52rem);
+    transform: translateY(-70rem) translateX(0) rotate(0) scale(1);
   }
   @media (min-width: 1400px) {
-    transform: translateY(- 53rem);
+    height: 128rem;
+    transform: translateY(-69rem) translateX(0) rotate(0) scale(1);
   }
   @media (min-width: 1600px) {
-    margin-right: s(40);
+    height: s(1800);
+    margin-right: s(32);
     right: 0;
-    transform: translateY(- 57rem);
+    transform: translateY(-58rem) translateX(0) rotate(0) scale(1);
+  }
+
+  &.order-ready {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+
+    @media (min-width: 1200px) {
+      animation-name: order-ready-xl;
+    }
+
+    @media (min-width: 1400px) {
+      animation-name: order-ready-xxl;
+    }
+
+    @media (min-width: 1600px) {
+      animation-name: order-ready-3xl;
+    }
+
+    @media (min-width: 1920px) {
+      animation-name: order-ready-hd;
+    }
+  }
+
+  &.order-ready-no {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: ease-out;
+
+    @media (min-width: 1200px) {
+      animation-name: order-ready-no-xl;
+    }
+
+    @media (min-width: 1400px) {
+      animation-name: order-ready-no-xxl;
+    }
+
+    @media (min-width: 1600px) {
+      animation-name: order-ready-no-3xl;
+    }
+
+    @media (min-width: 1920px) {
+      animation-name: order-ready-no-hd;
+    }
+  }
+
+
+}
+
+@keyframes order-ready-hd {
+  from {
+    transform: translateY(-58rem) translateX(0) rotate(0) scale(1);
+  }
+  to {
+    transform: translateY(-41rem) translateX(-10rem) rotate(70deg) scale(.7);
   }
 }
+
+@keyframes order-ready-no-hd {
+  from {
+    transform: translateY(-41rem) translateX(-10rem) rotate(70deg) scale(.7);
+  }
+  to {
+    transform: translateY(-58rem) translateX(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes order-ready-3xl {
+  from {
+    transform: translateY(-58rem) translateX(0) rotate(0) scale(1);
+  }
+  to {
+    transform: translateY(-41rem) translateX(-6rem) rotate(70deg) scale(.6);
+  }
+}
+
+@keyframes order-ready-no-3xl {
+  from {
+    transform: translateY(-41rem) translateX(-6rem) rotate(70deg) scale(.6);
+  }
+  to {
+    transform: translateY(-58rem) translateX(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes order-ready-xxl {
+  from {
+    transform: translateY(-69rem) translateX(0) rotate(0) scale(1);
+  }
+  to {
+    transform: translateY(-41rem) translateX(-6rem) rotate(70deg) scale(.75);
+  }
+}
+
+@keyframes order-ready-no-xxl {
+  from {
+    transform: translateY(-41rem) translateX(-6rem) rotate(70deg) scale(.75);
+  }
+  to {
+    transform: translateY(-69rem) translateX(0) rotate(0) scale(1);
+  }
+}
+
+@keyframes order-ready-xl {
+  from {
+    transform: translateY(-69rem) translateX(0) rotate(0) scale(1);
+  }
+  to {
+    transform: translateY(-41rem) translateX(-6rem) rotate(70deg) scale(.65);
+  }
+}
+
+@keyframes order-ready-no-xl {
+  from {
+    transform: translateY(-41rem) translateX(-6rem) rotate(70deg) scale(.65);
+  }
+  to {
+    transform: translateY(-69rem) translateX(0) rotate(0) scale(1);
+  }
+}
+
+
 
 .color-check__custom {
   border: s(2) solid transparent;
